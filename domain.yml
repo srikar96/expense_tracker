@@ -1,0 +1,54 @@
+slots:
+    category:
+        type: text
+    amount:
+        type: text
+    DATE:
+        type: text
+
+intents:
+    - greet
+    - goodbye
+    - affirm
+    - deny
+    - add_expense
+    - query_expense
+    # - update_expense
+    # - delete_expense
+    # - add_savings
+    # - query_savings
+    # - update_savings
+    # - delete_savings
+
+entities:
+    - category
+    - amount
+    - DATE
+
+actions:
+    - action_add_expense
+    - action_query_expense
+    - action_slots_reset
+
+responses:
+    utter_greet:
+        - text: "Hey! How are you?"
+        - text: "Hey! What's up?"
+
+    utter_goodbye:
+        - text: "Bye"
+        - text: "See you! Stay cautious"
+        - text: "Bye, Stay safe!"
+
+    utter_expense_added_one:
+        - text: "I added that to your expenses.\nYou said ${amount} for {category}."
+
+    utter_expense_added_two:
+        - text: "I added that to your expenses.\nYou said ${amount} for {category} with {extra} in notes."
+
+    utter_expense_query:
+        - text: "I have your results. You spent ${amount} for {DATE}"
+
+session_config:
+    session_expiration_time: 60
+    carry_over_slots_to_new_session: true
