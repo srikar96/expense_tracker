@@ -8,20 +8,31 @@ three major blocks
 The user can speak in the app and query for expenses or add new expenses. These spoken sentences are converted to text using Google's speech-to-text API and sent to the server on AWS for processing. The text is processed and the new expenses are added/existing expenses are queried from the database and the result is returned to the App which displays them on the screen.
 
  ### Examples of tasks
- **Query**: add $55 for transportation.
+ **Query**: add $55 for transportation. 
+ 
  **Action**: adds $55 to the transportation category for current month.
+ 
  **Result**: I added that to your expenses, you said $55 for transportation. 
  
+ ----------------------------------
  **Query**: add $25 for groceries notes purchased bread and milk.
+ 
  **Action**: adds $25 to the groceries category for current month and updates the notes with purchased bread and milk.
+ 
  **Result**: I added that to your expenses, you said $25 for groceries purchased bread and milk in notes.
   
+ ----------------------------------
  **Query**: How much did I spend on eating out last week?
+ 
  **Action**: queries the database to get the total amount spent in the eating out category for the dates in the previous week.
+ 
  **Result**: You spent $45 eating out last week. 
  
+ ----------------------------------
  **Query**: This month expenses on laundry
+ 
  **Action**: queries the database to get the total amount spent in the laundry category for the dates in the current month (untill now).
+ 
  **Result**: You spent $14 on laundry this month. 
  
  ## NLP with RASA framework
