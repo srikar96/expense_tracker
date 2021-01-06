@@ -41,9 +41,13 @@ The open source framwork RASA is used for the NLP tasks. Below is a brief explan
 
 ### Folder/File contents
 **domain.yml** - contains the intents, entities, actions and responses
+
 **data/stories.md** - Stories are the training data with conversation path examples used to train language model. 
+
 **data/nlu.md** - NLU examples for all the intents with entities.
+
 **functions.py** - custom python code to process the data and store/extract from the database.
+
 **models/** - Contains the trained model.
 
  - The way RASA works on a high level is when it receives a sentence it processes the text in a pipeline consisting of various tools. 
