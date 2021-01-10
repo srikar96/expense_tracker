@@ -60,6 +60,31 @@ The open source framwork RASA is used for the NLP tasks. Below is a brief explan
  - Once the date and category are extracted by RASA NLU server, this information is further processed to get the proper date range and a query is returned to the action (take a look at functions.py to see how the query is built with the information). 
  - Then a call to mongoDB is made with the query using pymongo to insert/query the data.  
  
+-----------------
+-----------------
+## Deployment on AWS
 
+#### Resources used on AWS
+
+ - EC2 instance (t2 medium) 
+ - Route53
+ ----------
+ - A t2 medium instace was used to deploy the RASA server (even micro
+   and mini should work but RASA installation required > 1GB RAM so
+   medium was used). The instance runs Ubuntu 16.04.
+ - Route53 is a cloud DNS service. It was used to map the domain (www.ext_____.com) to instance's internal IP. It redirects user requests to the instance. Route 53 is required since the domain was not purchased on AWS. The GoDaddy nameservers need to be  pointed to EC2 on AWS.
+ - MongoDB was locally set up on the compute instance and could be accesed vis localhost from the instance.
+ - RASA runs on the Flask micro framework.  To launch the application uWSGI application server is used and then Nginx was used to launch the application which acts as a front end reverse proxy.
+
+#### Steps in brief
+
+ 1. [Install RASA](https://legacy-docs-v1.rasa.com/user-guide/installation/), Pandas and MongoDB.
+ 2. Set up MongoDB. Pymongo connected is used to access the database from custom actions in RASA.
+ 3. Run the RASA core and actions server in background using tmux session.
+ 4. Install and create uWSGI and configure it. Create an WSGI entry point.
+ 5. Nginx is needed to pass web requests to the created socket using the uwsgi protocol. 
+ 6. Install Nginx and configure* the sites-available in `/etc/nginx` with port 80 and server_name with the domain. 
+ 7. Configure Route 53 to map the domain to instance IP. 
  
-   
+ *More information on installation of [UWSGI and Nginx](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04)  
+ **[Route53 additional instructions](https://www.tutorialspoint.com/amazon_web_services/amazon_web_services_route_53.htm)
